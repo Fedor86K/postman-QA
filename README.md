@@ -50,6 +50,6 @@ jsonData.photos.forEach((photo,index) => {
 ```
 Результат запуска тестов в Postman:
 
-![alt text]()
+![alt text](result.PNG)
 
 Успехов в Вашей работе!
