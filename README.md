@@ -28,7 +28,7 @@ jsonData.photos.forEach(photo => {
     pm.expect(photo).to.have.property('img_src');
     console.log(`Ссылка на фото: ${photo.img_src}`);
   });
-  // Test 3: Проверяем валидность ссылки на изображение и тип файла
+  // Test 3: Проверяем валидность ссылки на изображение и тип файла ресурса
   pm.test("Ссылка на фото является валидной, тип файла - jpg или png", () => {
     pm.expect(photo.img_src).to.match(/^https?:\/\/\S+/);
     console.log(`Ссылка валидна`);
