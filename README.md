@@ -16,7 +16,7 @@
 // Получаем JSON-ответ сервера для дальнейшей обработки
 var jsonData = pm.response.json();
 // Обходим каждый элемент массива 'photos', выводим в консоль информацию о прохождении теста
-jsonData.photos.forEach(photo => {
+jsonData.photos.forEach((photo,index) => {
   // Test 1: Проверяем, что JSON ответ содержит ключ 'id и его значение является числом
   pm.test("Ответ содержит ключ 'id'", () => {
     pm.expect(photo).to.have.property('id');
