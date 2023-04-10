@@ -8,7 +8,7 @@
 
 Тестируемый ответ JSON: response JSON.json 
 
-Файл коллекции:
+Файл коллекции: Test NASA API v 0.1.postman_collection.json
 
 Тестовый сценарий:
 
