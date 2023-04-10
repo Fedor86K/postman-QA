@@ -22,6 +22,7 @@ jsonData.photos.forEach(photo => {
     pm.expect(photo).to.have.property('id');
     pm.expect(typeof photo.id).to.equal('number');
     console.log(`ID фото: ${photo.id}`);
+    console.log(`Индекс фото: ${index}`);
   });
   // Test 2: Проверяем наличие ключа со ссылкой на ресурс с изображением
   pm.test("Ответ содержит ключ 'img_src'", () => {
