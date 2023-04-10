@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "test all photo",
+			"name": "test all rover photo",
 			"event": [
 				{
 					"listen": "test",
@@ -15,7 +15,6 @@
 						"exec": [
 							"// Получаем JSON-ответ сервера для дальнейшей обработки\r",
 							"var jsonData = pm.response.json();\r",
-							"\r",
 							"// Обходим каждый элемент массива 'photos'\r",
 							"jsonData.photos.forEach((photo,index) => {\r",
 							"  // Test 1: Проверяем, что JSON ответ содержит ключ 'id' изображения и его значение является числом\r",
@@ -29,16 +28,19 @@
 							"    pm.expect(photo).to.have.property('img_src');\r",
 							"    console.log(`Ссылка на фото: ${photo.img_src}`);\r",
 							"  });\r",
-							"  // Test 3: Проверяем валидность ссылки на изображение и тип файла\r",
-							"  pm.test(\"Ссылка на изображение является валидной, тип файла - jpg или png\", () => {\r",
+							"  // Test 3: Проверяем валидность ссылки на изображение\r",
+							"  pm.test(\"Ссылка на изображение является валидной\", () => {\r",
 							"    pm.expect(photo.img_src).to.match(/^https?:\\/\\/\\S+/);\r",
 							"    console.log(`Ссылка валидна`);\r",
+							"    });\r",
+							"  // Test 4: Проверяем доступность ресурса по ссылке\r",
+							"  pm.test(\"Изображение доступно по URL, тип файла - jpg,png или gif\", () => {  \r",
 							"    pm.sendRequest(photo.img_src, function (err, response) {\r",
-							"      pm.expect(response.headers.get(\"Content-Type\")).to.match(/^image\\/(jpeg|png)$/);\r",
-							"      console.log(`Файл доступен по URL`);\r",
+							"    pm.expect(response.headers.get(\"Content-Type\")).to.match(/^image\\/(jpeg|png|gif)$/);\r",
+							"    console.log(`Файл доступен по URL`);\r",
 							"    });\r",
 							"  });\r",
-							"  // Test 4: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200\r",
+							"  // Test 5: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200\r",
 							"  pm.test(\"Статус-код равен 200\", () => {\r",
 							"    pm.response.to.have.status(200);\r",
 							"    console.log(`Статус код 200`);\r",
@@ -54,7 +56,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21",
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21&api_key=DEMO_KEY",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -72,8 +74,11 @@
 					"query": [
 						{
 							"key": "earth_date",
-							"value": "2022-01-21",
-							"description": "дата фотографий"
+							"value": "2022-01-21"
+						},
+						{
+							"key": "api_key",
+							"value": "DEMO_KEY"
 						}
 					]
 				}
