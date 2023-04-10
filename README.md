@@ -43,7 +43,7 @@ jsonData.photos.forEach((photo,index) => {
   // Test 5: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200
   pm.test("Статус-код равен 200", () => {
     pm.response.to.have.status(200);
-    console.log(`Статус код 200`);
+    console.log(`Статус-код 200`);
   });
 }); 
 
