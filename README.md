@@ -6,13 +6,14 @@
 
 Тестовый запрос: https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21&api_key=DEMO_KEY
 
-Тестируемый ответ: [JSON](/response JSON.json)
+Тестируемый ответ: [JSON](response JSON.json)
 
 
-Файл коллекции: [postman collection](/Test NASA API v 0.1.postman_collection.json)
+Файл коллекции: [postman collection](Test NASA API v 0.1.postman_collection.json)
 
 Тестовый сценарий:
 
+``` JavaScript
 // Получаем JSON-ответ сервера для дальнейшей обработки
 var jsonData = pm.response.json();
 // Обходим каждый элемент массива 'photos'
@@ -46,4 +47,4 @@ jsonData.photos.forEach(photo => {
     console.log(`Статус код 200`);
   });
 });
-
+```
