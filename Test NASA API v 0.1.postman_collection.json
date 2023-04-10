@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "09963dca-1436-476f-acc9-8f06818c3588",
+		"name": "Test NASA API v 0.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24607742"
+	},
+	"item": [
+		{
+			"name": "test all photo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// Получаем JSON-ответ сервера для дальнейшей обработки\r",
+							"var jsonData = pm.response.json();\r",
+							"// Обходим каждый элемент массива 'photos'\r",
+							"jsonData.photos.forEach(photo => {\r",
+							"  // Test 1: Проверяем, что JSON ответ содержит ключ 'id' изображения и его значение является числом\r",
+							"  pm.test(\"Ответ содержит ключ 'id'\", () => {\r",
+							"    pm.expect(photo).to.have.property('id');\r",
+							"    pm.expect(typeof photo.id).to.equal('number');\r",
+							"    console.log(`ID фото: ${photo.id}`);\r",
+							"  });\r",
+							"  // Test 2: Проверяем наличие ключа со ссылкой на ресурс с изображением\r",
+							"  pm.test(\"Ответ содержит ключ 'img_src'\", () => {\r",
+							"    pm.expect(photo).to.have.property('img_src');\r",
+							"    console.log(`Ссылка на фото: ${photo.img_src}`);\r",
+							"  });\r",
+							"  // Test 3: Проверяем валидность ссылки на изображение и тип файла\r",
+							"  pm.test(\"Ссылка на фото является валидной, тип файла - jpg или png\", () => {\r",
+							"    pm.expect(photo.img_src).to.match(/^https?:\\/\\/\\S+/);\r",
+							"    console.log(`Ссылка валидна`);\r",
+							"  });\r",
+							"  // Test 4: Проверяем наличие контента JPG или PNG на URL\r",
+							"  pm.test(\"Фото присутствует по ссылке, тип файла - jpg или png\", () => {\r",
+							"      pm.sendRequest(photo.img_src, function (err, response) {\r",
+							"      pm.expect(response.headers.get(\"Content-Type\")).to.match(/^image\\/(jpeg|png)$/);\r",
+							"      console.log(`Файл доступен по URL`);\r",
+							"    });\r",
+							"  });\r",
+							"  // Test 5: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200\r",
+							"  pm.test(\"Статус-код равен 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(`Статус код 200`);\r",
+							"  });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"  \r",
+							"  \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "earth_date",
+							"value": "2022-01-21",
+							"description": "дата фотографий"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "DEMO_KEY",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
