@@ -15,7 +15,6 @@
 ``` JavaScript
 // Получаем JSON-ответ сервера для дальнейшей обработки
 var jsonData = pm.response.json();
-
 // Обходим каждый элемент массива 'photos'
 jsonData.photos.forEach((photo,index) => {
   // Test 1: Проверяем, что JSON ответ содержит ключ 'id' изображения и его значение является числом
