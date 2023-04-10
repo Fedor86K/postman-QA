@@ -1,4 +1,4 @@
-# postman - NASA
+# Postman - NASA
 
 Данный тестовый сценарий, демонстрирует метод валидации контента JSON в responseBody полученного через GET запрос к серверу https://api.nasa.gov
 
@@ -29,12 +29,12 @@ jsonData.photos.forEach(photo => {
     console.log(`Ссылка на фото: ${photo.img_src}`);
   });
   // Test 3: Проверяем валидность ссылки на изображение и тип файла ресурса
-  pm.test("Ссылка на фото является валидной, тип файла - jpg или png", () => {
+  pm.test("Ссылка на изображение является валидной, тип файла - jpg или png", () => {
     pm.expect(photo.img_src).to.match(/^https?:\/\/\S+/);
     console.log(`Ссылка валидна`);
   });
   // Test 4: Проверяем наличие контента JPG или PNG на URL
-  pm.test("Фото присутствует по ссылке, тип файла - jpg или png", () => {
+  pm.test("Изображение присутствует по ссылке, тип файла - jpg или png", () => {
       pm.sendRequest(photo.img_src, function (err, response) {
       pm.expect(response.headers.get("Content-Type")).to.match(/^image\/(jpeg|png)$/);
       console.log(`Файл доступен по URL`);
@@ -47,4 +47,9 @@ jsonData.photos.forEach(photo => {
   });
 });
 ```
+
+![alt text](result.PNG)
+
+Результат прохождения тестов в Postman
+
 Успехов в Вашей работе!
