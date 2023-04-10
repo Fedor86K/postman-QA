@@ -47,9 +47,8 @@ jsonData.photos.forEach(photo => {
   });
 });
 ```
+Результат запуска тестов в Postman:
 
 ![alt text](result.PNG)
-
-Результат прохождения тестов в Postman
 
 Успехов в Вашей работе!
