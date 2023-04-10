@@ -28,21 +28,25 @@ jsonData.photos.forEach((photo,index) => {
     pm.expect(photo).to.have.property('img_src');
     console.log(`Ссылка на фото: ${photo.img_src}`);
   });
-  // Test 3: Проверяем валидность ссылки на изображение и тип файла
-  pm.test("Ссылка на изображение является валидной, тип файла - jpg или png", () => {
+  // Test 3: Проверяем валидность ссылки на изображение
+  pm.test("Ссылка на изображение является валидной", () => {
     pm.expect(photo.img_src).to.match(/^https?:\/\/\S+/);
     console.log(`Ссылка валидна`);
+    });
+  // Test 4: Проверяем доступность ресурса по ссылке
+  pm.test("Изображение доступно по URL, тип файла - jpg,png или gif", () => {  
     pm.sendRequest(photo.img_src, function (err, response) {
-      pm.expect(response.headers.get("Content-Type")).to.match(/^image\/(jpeg|png)$/);
-      console.log(`Файл доступен по URL`);
+    pm.expect(response.headers.get("Content-Type")).to.match(/^image\/(jpeg|png|gif)$/);
+    console.log(`Файл доступен по URL`);
     });
   });
-  // Test 4: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200
+  // Test 5: Проверяем статус-код HTTP-ответа, чтобы убедиться, что он равен 200
   pm.test("Статус-код равен 200", () => {
     pm.response.to.have.status(200);
     console.log(`Статус код 200`);
   });
 }); 
+
 ```
 Результат запуска тестов в Postman:
 
