@@ -2,11 +2,11 @@
 
 Данный тестовый сценарий, демонстрирует метод валидации контента JSON в responseBody полученного через GET запрос к серверу https://api.nasa.gov
 
-Версия Postman:10.12.11
+Версия Postman: 10.12.11
 
-Тестовый запрос:https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21&api_key=DEMO_KEY
+Тестовый запрос: https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-01-21&api_key=DEMO_KEY
 
-Тестируемый ответ JSON: 
+Тестируемый ответ JSON: response JSON.json 
 
 Файл коллекции:
 
